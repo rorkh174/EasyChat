@@ -1,17 +1,16 @@
 package com.example.easychat.model;
 
-import java.sql.Timestamp;
+import com.google.firebase.Timestamp;
 
 public class ChatMessageModel {
     private String message;
     private String senderId;
     private Timestamp timestamp;
 
-    public ChatMessageModel(String message, String senderId, com.google.firebase.Timestamp now) {
-    }
+    public ChatMessageModel()
+    {}
 
-
-    public ChatMessageModel(String message, String senderId, Timestamp timestamp) {
+    public ChatMessageModel(String message, String senderId, com.google.firebase.Timestamp timestamp) {
         this.message = message;
         this.senderId = senderId;
         this.timestamp = timestamp;
@@ -33,11 +32,11 @@ public class ChatMessageModel {
         this.senderId = senderId;
     }
 
-    public Timestamp getTimestamp() {
+    public com.google.firebase.Timestamp getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(com.google.firebase.Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 }

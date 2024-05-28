@@ -36,6 +36,7 @@
             android:id="@+id/main_search_btn"/>
 
 
+
     </RelativeLayout>
 
 
@@ -60,6 +61,7 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:id="@+id/bottom_navigation"
         app:menu="@menu/bottom_navigation_menu"/>
+
 
 
 </RelativeLayout>

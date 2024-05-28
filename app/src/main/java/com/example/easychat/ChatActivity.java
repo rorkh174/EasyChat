@@ -2,6 +2,7 @@ package com.example.easychat;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.PixelCopy;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -105,8 +106,10 @@ public class ChatActivity extends AppCompatActivity {
 
         }));
 
-        getOrCreateChatroomModel();
-        setupChatRecyclerView();
+
+            getOrCreateChatroomModel();
+            setupChatRecyclerView();
+
     }
 
     void setupChatRecyclerView(){
@@ -154,21 +157,26 @@ public class ChatActivity extends AppCompatActivity {
 
 
     void getOrCreateChatroomModel(){
-        FirebaseUtil.getChatroomReference(chatroomId).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
-               chatroomModel = task.getResult().toObject(ChatroomModel.class);
-               if (chatroomModel==null){
-                   //first time chat
-                   chatroomModel = new ChatroomModel(
-                           chatroomId,
-                           Arrays.asList(FirebaseUtil.currentUserId(),otherUser.getUserId()),
-                           Timestamp.now(),
-                           ""
-                   );
-                   FirebaseUtil.getChatroomReference(chatroomId).set(chatroomModel);
-               }
-            }
-        });
+
+            FirebaseUtil.getChatroomReference(chatroomId).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    chatroomModel = task.getResult().toObject(ChatroomModel.class);
+                    if (chatroomModel==null){
+                        //first time chat
+                        chatroomModel = new ChatroomModel(
+                                chatroomId,
+                                Arrays.asList(FirebaseUtil.currentUserId(),otherUser.getUserId()),
+                                Timestamp.now(),
+                                ""
+                        );
+                        FirebaseUtil.getChatroomReference(chatroomId).set(chatroomModel);
+                    }
+                }
+                else
+                {
+                    Log.e("getOrCreateChatroomModel", task.getException().getMessage());
+                }
+            });
 
     }
 
